@@ -2,7 +2,7 @@ package dist.ai.backend.controllers;
 
 import dist.ai.backend.models.Song;
 import dist.ai.backend.repositories.SongRepository;
-import dist.ai.backend.services.DataService;
+import dist.ai.backend.database.DataContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ import java.util.List;
 public class WebController {
     //Initialiseren databank repositories
     @Autowired
-    private DataService data;
+    private DataContext data;
 
     @Autowired
     private SongRepository songRepo;

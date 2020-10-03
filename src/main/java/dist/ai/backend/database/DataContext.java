@@ -1,8 +1,6 @@
-package dist.ai.backend.services;
+package dist.ai.backend.database;
 
-import dist.ai.backend.models.PlayedSong;
-import dist.ai.backend.models.Song;
-import dist.ai.backend.models.User;
+import dist.ai.backend.models.*;
 import dist.ai.backend.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class DataService {
+public class DataContext {
 
     @Autowired
     private AlbumRepository albumRepo;
@@ -92,6 +90,18 @@ public class DataService {
 
     public User getMostActiveUser() {
         return userRepo.findHighestVoter();
+    }
+
+    public Artist getArtist(Integer id){
+        return artistRepo.findByIdEquals(id);
+    }
+
+    public Album getAlbum(Integer id){
+        return albumRepo.findByIdEquals(id);
+    }
+
+    public Genre getGenre(Integer id){
+        return genreRepo.findByIdEquals(id);
     }
 
 
