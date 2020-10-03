@@ -1,7 +1,7 @@
 package dist.ai.backend.database;
 
 import com.mongodb.client.MongoClients;
-import dist.ai.backend.model.Vote;
+import dist.ai.backend.models.Vote;
 import dist.ai.backend.services.TimerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;

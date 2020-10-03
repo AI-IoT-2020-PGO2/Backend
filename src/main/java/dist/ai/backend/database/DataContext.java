@@ -1,5 +1,6 @@
 package dist.ai.backend.database;
 
+import dist.ai.backend.models.SongInfo;
 import dist.ai.backend.models.*;
 import dist.ai.backend.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +83,7 @@ public class DataContext {
 
     public void setPlaying(Song song) {
         currentlyPlaying = song;
+        SongInfo info = new SongInfo(song.getSong_name(), getArtist(song.getArtist_id()).getName(), song.getId());
     }
 
     public Song getCurrentlyPlaying() {

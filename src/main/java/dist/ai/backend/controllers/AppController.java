@@ -1,8 +1,7 @@
 package dist.ai.backend.controllers;
 
 import dist.ai.backend.database.VoteContext;
-import dist.ai.backend.model.SongInfo;
-import dist.ai.backend.model.Vote;
+import dist.ai.backend.models.SongInfo;
 import dist.ai.backend.services.MQTTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

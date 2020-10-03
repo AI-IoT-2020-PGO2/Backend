@@ -1,4 +1,4 @@
-package dist.ai.backend.model;
+package dist.ai.backend.models;
 
 public class SongInfo {
     private String title;
