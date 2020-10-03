@@ -1,7 +1,6 @@
 package dist.ai.backend.controllers;
 
 import dist.ai.backend.models.Song;
-import dist.ai.backend.repositories.SongRepository;
 import dist.ai.backend.database.DataContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,9 +21,6 @@ public class WebController {
     //Initialiseren databank repositories
     @Autowired
     private DataContext data;
-
-    @Autowired
-    private SongRepository songRepo;
 
     private List<Song> songs;
     private Song currentPlaying;
