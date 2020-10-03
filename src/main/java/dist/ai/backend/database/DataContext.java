@@ -81,7 +81,7 @@ public class DataContext {
         return returnList;
     }
 
-    public void setPlaying(Song song) {
+    public void setCurrentSong(Song song) {
         currentlyPlaying = song;
         SongInfo info = new SongInfo(song.getSong_name(), getArtist(song.getArtist_id()).getName(), song.getId());
     }
