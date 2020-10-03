@@ -1,6 +1,7 @@
 package dist.ai.backend.controllers;
 
 import dist.ai.backend.models.Song;
+import dist.ai.backend.repositories.SongRepository;
 import dist.ai.backend.services.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,11 @@ import java.util.List;
 @RequestMapping("/web")
 public class WebController {
     //Initialiseren databank repositories
+    @Autowired
     private DataService data;
+
+    @Autowired
+    private SongRepository songRepo;
 
     private List<Song> songs;
     private Song currentPlaying;
@@ -29,7 +34,6 @@ public class WebController {
     public WebController() {
         currentPlaying = null;
         songs = new ArrayList<>();
-        data = new DataService();
     }
 
     @GetMapping("/get/songs")
@@ -40,6 +44,7 @@ public class WebController {
 
     @GetMapping("/get/current")
     public ResponseEntity<Song> getCurrent() {
+        this.currentPlaying = data.getCurrentlyPlaying();
         return new ResponseEntity<>(this.currentPlaying, HttpStatus.OK);
     }
 
