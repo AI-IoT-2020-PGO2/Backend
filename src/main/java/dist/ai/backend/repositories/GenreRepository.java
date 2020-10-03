@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface GenreInterface extends CrudRepository<Genre, Integer> {
+public interface GenreRepository extends CrudRepository<Genre, Integer> {
     public List<Genre> findAll();
 
     public Genre findByIdEquals(Integer id);

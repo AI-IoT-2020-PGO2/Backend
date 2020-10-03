@@ -1,6 +1,7 @@
 package dist.ai.backend.controllers;
 
-import dist.ai.backend.model.Song;
+import dist.ai.backend.models.Song;
+import dist.ai.backend.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,36 +18,48 @@ import java.util.List;
 @RestController
 @RequestMapping("/web")
 public class WebController {
-    //Initialiseren databank
+    //Initialiseren databank repositories
+    @Autowired
+    private AlbumRepository albumRepo;
+    @Autowired
+    private ArtistRepository artistRepo;
+    @Autowired
+    private GenreRepository genreRepo;
+    @Autowired
+    private PlayedSongRepository playedSongRepo;
+    @Autowired
+    private ProcessedVotesRepository processedVotesRepo;
+    @Autowired
+    private SongRepository songRepo;
+    @Autowired
+    private UserRepository userRepo;
 
-    //TODO: vervangen door initialisatie databank
     private List<Song> songs;
     private Song currentPlaying;
 
+
     @Autowired
     public WebController() {
+        currentPlaying = null;
         songs = new ArrayList<>();
-        songs.add(new Song("10000 luchtballonnen", "K3"));
-        songs.add(new Song("Oma's aan de top", "K3"));
-        currentPlaying = new Song("Oya lélé", "K3");
     }
 
     @GetMapping("/get/songs")
     public ResponseEntity<List<Song>> getSongs() {
-        //TODO: vervangen door: uitlezen songs uit databank
+        this.songs = songRepo.findAll();
         return new ResponseEntity<>(this.songs, HttpStatus.OK);
     }
 
     @GetMapping("/get/current")
     public ResponseEntity<Song> getCurrent() {
-        //TODO: vervangen door: uitlezen songs uit databank
         return new ResponseEntity<>(this.currentPlaying, HttpStatus.OK);
     }
 
     @PutMapping("/set/current/{songID}")
     public ResponseEntity<Song> setCurrentPlaying(@RequestBody int songID) {
-        //TODO: song met id uitlezen uit databank en instellen als currentplaying
-        this.currentPlaying = new Song("Alle kleuren", "K3");
+        //TODO: vragen hoe PutMapping en RequestBody werkt
+
+        currentPlaying = songRepo.findByIdEquals(songID);
 
         return new ResponseEntity<>(this.currentPlaying, HttpStatus.OK);
     }
