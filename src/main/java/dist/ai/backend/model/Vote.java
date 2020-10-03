@@ -1,7 +1,5 @@
 package dist.ai.backend.model;
 
-import com.mongodb.internal.connection.Time;
-
 public class Vote {
     byte score;
     int userID;

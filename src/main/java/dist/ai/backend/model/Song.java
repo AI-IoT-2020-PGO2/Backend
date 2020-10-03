@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Time;
+
 @Data
 @NoArgsConstructor
 public class Song {
@@ -15,4 +17,10 @@ public class Song {
         this.title = title;
         this.band = band;
     }
+//    private int id;
+//    private String song_name;
+//    private int artist_id;
+//    private int album_id;
+//    private int genre_id;
+//    private Time length;
 }
