@@ -3,6 +3,8 @@ package dist.ai.backend.database;
 import dist.ai.backend.models.SongInfo;
 import dist.ai.backend.models.*;
 import dist.ai.backend.repositories.*;
+import dist.ai.backend.services.MQTTService;
+import dist.ai.backend.services.TimerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -28,6 +30,10 @@ public class DataContext {
     private SongRepository songRepo;
     @Autowired
     private UserRepository userRepo;
+    @Autowired
+    MQTTService mqttService;
+    @Autowired
+    TimerService timerService;
 
     private Song currentlyPlaying = null;
 
@@ -84,6 +90,8 @@ public class DataContext {
     public void setCurrentSong(Song song) {
         currentlyPlaying = song;
         SongInfo info = new SongInfo(song.getSong_name(), getArtist(song.getArtist_id()).getName(), song.getId());
+        mqttService.publishNewSong(info);
+        timerService.newSongStarted();
     }
 
     public Song getCurrentlyPlaying() {
@@ -94,15 +102,15 @@ public class DataContext {
         return userRepo.findHighestVoter();
     }
 
-    public Artist getArtist(Integer id){
+    public Artist getArtist(Integer id) {
         return artistRepo.findByIdEquals(id);
     }
 
-    public Album getAlbum(Integer id){
+    public Album getAlbum(Integer id) {
         return albumRepo.findByIdEquals(id);
     }
 
-    public Genre getGenre(Integer id){
+    public Genre getGenre(Integer id) {
         return genreRepo.findByIdEquals(id);
     }
 

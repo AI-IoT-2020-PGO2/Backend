@@ -15,18 +15,9 @@ public class AppController {
     @Autowired
     VoteContext voteContext;
 
-    @Autowired
-    MQTTService mqttService;
-
-    @PostMapping("/vote")
-    public ResponseEntity<Object> Vote() {
-        mqttService.publishNewSong(new SongInfo("testSong", "testArtist", 1));
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
     @PostMapping("/new")
     public ResponseEntity<String> New() {
-        return new ResponseEntity<>("{\"uid\":12}",HttpStatus.CREATED);
+        return new ResponseEntity<>("{\"uid\":12}", HttpStatus.CREATED);
     }
 
     @GetMapping("/status")
