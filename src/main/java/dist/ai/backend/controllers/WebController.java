@@ -1,7 +1,7 @@
 package dist.ai.backend.controllers;
 
 import dist.ai.backend.models.Song;
-import dist.ai.backend.repositories.*;
+import dist.ai.backend.services.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,20 +19,7 @@ import java.util.List;
 @RequestMapping("/web")
 public class WebController {
     //Initialiseren databank repositories
-    @Autowired
-    private AlbumRepository albumRepo;
-    @Autowired
-    private ArtistRepository artistRepo;
-    @Autowired
-    private GenreRepository genreRepo;
-    @Autowired
-    private PlayedSongRepository playedSongRepo;
-    @Autowired
-    private ProcessedVotesRepository processedVotesRepo;
-    @Autowired
-    private SongRepository songRepo;
-    @Autowired
-    private UserRepository userRepo;
+    private DataService data;
 
     private List<Song> songs;
     private Song currentPlaying;
@@ -42,11 +29,12 @@ public class WebController {
     public WebController() {
         currentPlaying = null;
         songs = new ArrayList<>();
+        data = new DataService();
     }
 
     @GetMapping("/get/songs")
     public ResponseEntity<List<Song>> getSongs() {
-        this.songs = songRepo.findAll();
+        this.songs = data.getSongs();
         return new ResponseEntity<>(this.songs, HttpStatus.OK);
     }
 
@@ -59,7 +47,7 @@ public class WebController {
     public ResponseEntity<Song> setCurrentPlaying(@RequestBody int songID) {
         //TODO: vragen hoe PutMapping en RequestBody werkt
 
-        currentPlaying = songRepo.findByIdEquals(songID);
+        currentPlaying = data.getSong(songID);
 
         return new ResponseEntity<>(this.currentPlaying, HttpStatus.OK);
     }
