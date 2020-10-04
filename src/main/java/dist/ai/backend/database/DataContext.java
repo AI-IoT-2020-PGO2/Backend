@@ -114,5 +114,13 @@ public class DataContext {
         return genreRepo.findByIdEquals(id);
     }
 
+    public SongInfo getSongInfo(Song song){
+        return new SongInfo(song.getSong_name(), getArtist(song.getArtist_id()).getName(), song.getId());
+    }
+    
+    public SongInfo getSongInfo(Integer id){
+        Song song = getSong(id);
+        return getSongInfo(song);
+    }
 
 }
