@@ -1,6 +1,8 @@
 package dist.ai.backend.controllers;
 
+import dist.ai.backend.database.DataContext;
 import dist.ai.backend.database.VoteContext;
+import dist.ai.backend.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +15,13 @@ public class AppController {
     @Autowired
     VoteContext voteContext;
 
+    @Autowired
+    private DataContext data;
+
     @PostMapping("/new")
     public ResponseEntity<String> New() {
-        return new ResponseEntity<>("{\"uid\":12}", HttpStatus.CREATED);
+        User user = data.adduser();
+        return new ResponseEntity<>(String.format("{\"uid\":%d}", user.getId()), HttpStatus.CREATED);
     }
 
     @GetMapping("/status")

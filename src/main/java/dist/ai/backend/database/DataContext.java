@@ -123,4 +123,10 @@ public class DataContext {
         return getSongInfo(song);
     }
 
+    public User adduser() {
+        int id = userRepo.findCount();
+        User user = new User(id + 1, 0);
+        userRepo.save(user);
+        return user;
+    }
 }

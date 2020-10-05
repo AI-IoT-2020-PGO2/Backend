@@ -11,4 +11,7 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 
     @Query("select user from User user where user.total_votes = (select max(user.total_votes) from User user)")
     User findHighestVoter();
+
+    @Query("select count(user) from User user")
+    int findCount();
 }
