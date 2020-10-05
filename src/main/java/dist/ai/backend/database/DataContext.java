@@ -124,9 +124,10 @@ public class DataContext {
     }
 
     public User adduser() {
-        int id = userRepo.findCount();
+        int id =(int) userRepo.count();
+        System.out.println(id);
         User user = new User(id + 1, 0);
-        userRepo.save(user);
+        user = userRepo.save(user);
         return user;
     }
 }
